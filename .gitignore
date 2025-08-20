@@ -1,0 +1,38 @@
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# --- Logs / Cache ---
+*.log
+.phpunit.result.cache
+/cache/
+/tmp/
+coverage/
+
+# --- Composer ---
+/vendor/
+/composer.phar
+# ※ アプリケーションでは通常 composer.lock は「コミットする」ので、ここでは除外しません
+
+# --- Environment secrets ---
+.env
+.env.*.local
+*.local.php
+
+# --- Node / Frontend（導入する場合に備えて無害に無視） ---
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/dist/
+/build/
+
+# --- Laravel を導入する場合に備えて（存在しなくても無害） ---
+/storage/
+/bootstrap/cache/
+/public/storage
