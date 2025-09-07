@@ -21,6 +21,18 @@ services:
       - "3306:3306"         # 競合するならこの行を消してOK
     volumes:
       - db-data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+
+  pma:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: db          # 同一Composeネットワーク上のMariaDBサービス名
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 64M
+    ports:
+      - "8081:80"           # http://localhost:8081
+    depends_on:
+      - db
 
 volumes:
   db-data:

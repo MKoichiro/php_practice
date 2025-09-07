@@ -15,7 +15,7 @@
   //   iframeなどの埋め込みで透明なボタンを本来のボタンに重ねて表示し、攻撃者に何らかの情報を渡す攻撃
   // -> httpヘッダーを操作して防衛する。
   // 施策１: XFO: DENY
-  header('X-FRAME-OPTIONS: DENY');
+  header('X-FRAME-OPTIONS: SAMEORIGIN');
   // -> <iframe>, <frame>, <object>, <embed>でいかなるsrcも拒否するもの。
   // 施策２: XFO: SAMEORIGIN
   // header('X-FRAME-OPTIONS: SAMEORIGIN');
@@ -181,6 +181,12 @@
 
   <?php if ($PAGE_NAME === 'COMPLETE') : ?>
     <?php if ($_POST['csrf_token'] === $_SESSION['csrfToken']) : ?>
+      <?php
+        require 'insert.php';
+        $want = ['name', 'email', 'gender', 'age', 'home_page', 'content'];
+        $subset = array_intersect_key($_POST, array_flip($want));
+        insertContact($subset);
+      ?>
       <h1>完了画面</h1>
       <p>送信が完了しました。</p>
       <?php unset($_SESSION['csrfToken']) ?>
